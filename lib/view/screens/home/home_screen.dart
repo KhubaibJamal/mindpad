@@ -77,7 +77,11 @@ class _HomeScreenState extends State<HomeScreen> {
             MaterialPageRoute(
               builder: (context) => const AddNoteScreen(isEditMode: false),
             ),
-          );
+          ).then((value) {
+            print("Navigated");
+            cubit.getAllNote();
+            print("Navigated COMPLETED");
+          });
         },
         child: Center(
           child: Icon(
@@ -130,8 +134,31 @@ class _HomeScreenState extends State<HomeScreen> {
                                 return Padding(
                                   padding: const EdgeInsets.only(bottom: 8.0),
                                   child: Card(
-                                      child:
-                                          NoteTile(note: state.notes[index])),
+                                    child: NoteTile(
+                                      note: state.notes[index],
+                                      onEditPress: () {
+                                        print("DDD: ${state.notes[index].id}");
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => AddNoteScreen(
+                                              isEditMode: true,
+                                              note: state.notes[index],
+                                            ),
+                                          ),
+                                        ).then((value) {
+                                          print("Navigated");
+                                          cubit.getAllNote();
+                                          print("Navigated COMPLETED");
+                                        });
+                                      },
+                                      onDeletePress: () {
+                                        context
+                                            .read<HomeCubit>()
+                                            .deleteNote(state.notes[index].id);
+                                      },
+                                    ),
+                                  ),
                                 );
                               } else {
                                 return Center(

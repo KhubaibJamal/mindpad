@@ -104,19 +104,22 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                   onTap: () {
                     if (widget.isEditMode) {
                       // update function
-                      context.read<AddNoteCubit>().addNote(
+                      context.read<AddNoteCubit>().updateNote(
+                            widget.note!.id,
                             NoteEntities(
-                                id: widget.note!.id,
-                                title: titleController.text,
-                                description: descriptionController.text),
+                              id: widget.note!.id,
+                              title: titleController.text,
+                              description: descriptionController.text,
+                            ),
                           );
                     } else {
                       // add function
                       context.read<AddNoteCubit>().addNote(
                             NoteEntities(
-                                id: '',
-                                title: titleController.text,
-                                description: descriptionController.text),
+                              id: '',
+                              title: titleController.text,
+                              description: descriptionController.text,
+                            ),
                           );
                     }
                     Navigator.of(context).pop();

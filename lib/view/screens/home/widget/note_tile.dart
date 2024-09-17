@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_pad/domain/entities/note_entities.dart';
-import 'package:mind_pad/view/screens/add%20note%20screen/add_note_screen.dart';
-import 'package:mind_pad/view/screens/home/home_cubit.dart';
 import 'package:mind_pad/view/utils/theme.dart';
 
 class NoteTile extends StatelessWidget {
   final NoteEntities note;
+  final VoidCallback onEditPress;
+  final VoidCallback onDeletePress;
   const NoteTile({
     super.key,
     required this.note,
+    required this.onEditPress,
+    required this.onDeletePress,
   });
 
   @override
@@ -19,17 +20,7 @@ class NoteTile extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AddNoteScreen(
-                    isEditMode: true,
-                    note: note,
-                  ),
-                ),
-              );
-            },
+            onTap: onEditPress,
             child: Container(
               width: 35.0,
               height: 35.0,
@@ -49,9 +40,7 @@ class NoteTile extends StatelessWidget {
           ),
           const SizedBox(width: 10),
           GestureDetector(
-            onTap: () {
-              context.read<HomeCubit>().deleteNote(note.id);
-            },
+            onTap: onDeletePress,
             child: Container(
               width: 35.0,
               height: 35.0,
