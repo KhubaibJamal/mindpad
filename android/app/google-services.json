@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "164890253760",
+    "project_id": "notable-88c10",
+    "storage_bucket": "notable-88c10.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:164890253760:android:7fd9936937e8fe0902d025",
+        "android_client_info": {
+          "package_name": "com.example.mind_pad"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBavLJpD2ZEkx4xixnYeTt6iN5Yq1yUKAI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:164890253760:android:138003882a5ab02502d025",
+        "android_client_info": {
+          "package_name": "com.example.notable"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBavLJpD2ZEkx4xixnYeTt6iN5Yq1yUKAI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
