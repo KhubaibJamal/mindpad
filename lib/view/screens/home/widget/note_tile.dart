@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mind_pad/domain/entities/note_entities.dart';
 import 'package:mind_pad/view/utils/theme.dart';
 
 class NoteTile extends StatelessWidget {
+  final NoteEntities note;
   const NoteTile({
     super.key,
+    required this.note,
   });
 
   @override
@@ -68,14 +71,14 @@ class NoteTile extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       tileColor: CustomColors.primary.withOpacity(0.7),
       title: Text(
-        "note",
+        note.title!,
         style: Theme.of(context)
             .textTheme
             .headlineMedium!
             .copyWith(color: Colors.white, fontSize: 20),
       ),
       subtitle: Text(
-        "note.description",
+        note.description!,
         style: Theme.of(context)
             .textTheme
             .headlineMedium!
