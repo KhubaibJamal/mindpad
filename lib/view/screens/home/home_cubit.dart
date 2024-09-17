@@ -8,7 +8,9 @@ class HomeCubit extends Cubit<HomeState> {
 
   HomeCubit(
     this.noteRepository,
-  ) : super(HomeState.initial());
+  ) : super(HomeState.initial()) {
+    getAllNote();
+  }
 
   Future<void> getAllNote() async {
     emit(state.copyWith(isLoading: true));

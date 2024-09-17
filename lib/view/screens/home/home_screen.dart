@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mind_pad/view/screens/add%20note%20screen/add_note_screen.dart';
 import 'package:mind_pad/view/screens/home/home_cubit.dart';
 import 'package:mind_pad/view/screens/home/home_state.dart';
 import 'package:mind_pad/view/screens/home/widget/note_tile.dart';
@@ -21,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    cubit = BlocProvider.of<HomeCubit>(context);
+    cubit = BlocProvider.of<HomeCubit>(context)..getAllNote();
   }
 
   // @override
@@ -71,12 +72,12 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: CustomColors.primary,
         onPressed: () {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => const AddNoteScreen(isEditMode: false),
-          //   ),
-          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AddNoteScreen(isEditMode: false),
+            ),
+          );
         },
         child: Center(
           child: Icon(
@@ -119,31 +120,32 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
                   SizedBox(height: height * 0.01),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: state.notes.length,
-                      itemBuilder: (context, index) {
-                        print(state.notes.length);
-                        if (state.error!.isEmpty) {
-                          return state.isLoading
-                              ? const CircularProgressIndicator()
-                              : Padding(
+                  state.isLoading
+                      ? const Center(child: CircularProgressIndicator())
+                      : Expanded(
+                          child: ListView.builder(
+                            itemCount: state.notes.length,
+                            itemBuilder: (context, index) {
+                              if (state.error!.isEmpty) {
+                                return Padding(
                                   padding: const EdgeInsets.only(bottom: 8.0),
                                   child: Card(
                                       child:
                                           NoteTile(note: state.notes[index])),
                                 );
-                        } else {
-                          return Center(
-                            child: Text(
-                              state.error!,
-                              style: Theme.of(context).textTheme.displayMedium,
-                            ),
-                          );
-                        }
-                      },
-                    ),
-                  ),
+                              } else {
+                                return Center(
+                                  child: Text(
+                                    state.error!,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displayMedium,
+                                  ),
+                                );
+                              }
+                            },
+                          ),
+                        ),
                 ],
               );
             }),
