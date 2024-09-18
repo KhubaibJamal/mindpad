@@ -2,18 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_pad/domain/entities/note_entities.dart';
 import 'package:mind_pad/view/screens/add%20note%20screen/add_note_cubit.dart';
+import 'package:mind_pad/view/screens/add%20note%20screen/add_note_initial_params.dart';
 import 'package:mind_pad/view/screens/add%20note%20screen/add_note_state.dart';
 import 'package:mind_pad/view/widgets/custom_button.dart';
 import 'package:mind_pad/view/widgets/custom_textfield.dart';
 
 class AddNoteScreen extends StatefulWidget {
-  final NoteEntities? note;
-  final bool isEditMode;
-  const AddNoteScreen({
-    super.key,
-    this.note,
-    required this.isEditMode,
-  });
+  final AddNoteInitialParams initialParams;
+  const AddNoteScreen({super.key, required this.initialParams});
 
   @override
   State<AddNoteScreen> createState() => _AddNoteScreenState();
@@ -33,9 +29,9 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
   }
 
   initialization() {
-    if (widget.isEditMode && widget.note != null) {
-      titleController.text = widget.note!.title!;
-      descriptionController.text = widget.note!.description!;
+    if (widget.initialParams.isEditMode && widget.initialParams.note != null) {
+      titleController.text = widget.initialParams.note!.title!;
+      descriptionController.text = widget.initialParams.note!.description!;
     }
   }
 
@@ -51,7 +47,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
           child: const Icon(Icons.arrow_back_ios),
         ),
         title: Text(
-          widget.isEditMode ? "Edit Note" : "Add a Note",
+          widget.initialParams.isEditMode ? "Edit Note" : "Add a Note",
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.displayLarge,
         ),
@@ -100,14 +96,14 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                 state is AddNoteState;
                 return CustomButton(
                   height: 50,
-                  title: widget.isEditMode ? 'Update' : 'Add',
+                  title: widget.initialParams.isEditMode ? 'Update' : 'Add',
                   onTap: () {
-                    if (widget.isEditMode) {
+                    if (widget.initialParams.isEditMode) {
                       // update function
                       context.read<AddNoteCubit>().updateNote(
-                            widget.note!.id,
+                            widget.initialParams.note!.id,
                             NoteEntities(
-                              id: widget.note!.id,
+                              id: widget.initialParams.note!.id,
                               title: titleController.text,
                               description: descriptionController.text,
                             ),

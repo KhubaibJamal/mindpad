@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mind_pad/view/screens/add%20note%20screen/add_note_initial_params.dart';
 import 'package:mind_pad/view/screens/add%20note%20screen/add_note_screen.dart';
 import 'package:mind_pad/view/screens/home/home_cubit.dart';
+import 'package:mind_pad/view/screens/home/home_initial_params.dart';
 import 'package:mind_pad/view/screens/home/home_state.dart';
 import 'package:mind_pad/view/screens/home/widget/note_tile.dart';
 import 'package:mind_pad/view/utils/theme.dart';
 import 'package:mind_pad/view/widgets/custom_textfield.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final HomeInitialParams initialParams;
+  const HomeScreen({super.key, required this.initialParams});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -17,46 +20,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController searchController = TextEditingController();
   late HomeCubit cubit;
-  // List<NoteModel> filterNotes = [];
 
   @override
   void initState() {
     super.initState();
     cubit = BlocProvider.of<HomeCubit>(context)..getAllNote();
   }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   context.read<NoteBloc>().add(LoadNotes());
-  //   searchController.addListener(_filterNotes);
-  // }
-
-  // @override
-  // void dispose() {
-  //   searchController.removeListener(_filterNotes);
-  //   searchController.dispose();
-  //   super.dispose();
-  // }
-
-  // void _filterNotes() {
-  //   final query = searchController.text;
-  //   setState(() {
-  //     filterNotes = filterNoteList(filterNotes, query);
-  //   });
-  // }
-
-  // List<NoteModel> filterNoteList(List<NoteModel> note, String query) {
-  //   if (query.isEmpty) {
-  //     return note;
-  //   }
-
-  //   final String lowercaseQuery = query.toLowerCase();
-  //   return note.where((note) {
-  //     final String lowercaseName = note.title!.toLowerCase();
-  //     return lowercaseName.contains(lowercaseQuery);
-  //   }).toList();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +44,9 @@ class _HomeScreenState extends State<HomeScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const AddNoteScreen(isEditMode: false),
+              builder: (context) => const AddNoteScreen(
+                initialParams: AddNoteInitialParams(isEditMode: false),
+              ),
             ),
           ).then((value) {
             print("Navigated");
@@ -142,8 +113,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) => AddNoteScreen(
-                                              isEditMode: true,
-                                              note: state.notes[index],
+                                              // isEditMode: true,
+                                              // note: state.notes[index],
+                                              initialParams:
+                                                  AddNoteInitialParams(
+                                                isEditMode: true,
+                                                note: state.notes[index],
+                                              ),
                                             ),
                                           ),
                                         ).then((value) {

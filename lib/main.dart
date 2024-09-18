@@ -5,6 +5,7 @@ import 'package:mind_pad/data/note_services.dart';
 import 'package:mind_pad/domain/repository/note_repository.dart';
 import 'package:mind_pad/firebase_options.dart';
 import 'package:mind_pad/view/screens/add%20note%20screen/add_note_cubit.dart';
+import 'package:mind_pad/view/screens/home/home_initial_params.dart';
 import 'package:mind_pad/view/screens/home/home_screen.dart';
 import 'package:mind_pad/view/screens/home/home_cubit.dart';
 import 'package:mind_pad/view/utils/theme.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'MindPad',
       theme: lightTheme,
-      home: const HomeScreen(),
+      home: const HomeScreen(initialParams: HomeInitialParams()),
     );
   }
 }
