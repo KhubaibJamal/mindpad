@@ -25,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     cubit = BlocProvider.of<HomeCubit>(context)..getAllNote();
+    cubit.homeNavigator.context = context;
   }
 
   @override
@@ -41,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: CustomColors.primary,
         onPressed: () {
+          //     cubit.addNoteOnTap(const AddNoteInitialParams(isEditMode: false)),
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -109,12 +111,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                       note: state.notes[index],
                                       onEditPress: () {
                                         print("DDD: ${state.notes[index].id}");
+                                        // cubit
+                                        //     .addNoteOnTap(AddNoteInitialParams(
+                                        //         isEditMode: true,
+                                        //         note: state.notes[index]))
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) => AddNoteScreen(
-                                              // isEditMode: true,
-                                              // note: state.notes[index],
                                               initialParams:
                                                   AddNoteInitialParams(
                                                 isEditMode: true,

@@ -1,4 +1,5 @@
 import 'package:mind_pad/domain/repository/note_repository.dart';
+import 'package:mind_pad/view/screens/add%20note%20screen/add_note_initial_params.dart';
 import 'package:mind_pad/view/screens/home/home_navigator.dart';
 import 'package:mind_pad/view/screens/home/home_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,4 +45,7 @@ class HomeCubit extends Cubit<HomeState> {
       print(e.toString());
     }
   }
+
+  addNoteOnTap(AddNoteInitialParams initialParams) =>
+      homeNavigator.pushToAddNoteScreen(initialParams);
 }

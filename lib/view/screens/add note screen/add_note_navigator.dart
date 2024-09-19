@@ -6,7 +6,7 @@ import 'package:mind_pad/view/screens/add%20note%20screen/add_note_screen.dart';
 class AddNoteNavigator {}
 
 mixin AddNoteRoute {
-  pushToHome(AddNoteInitialParams initialParams) {
+  pushToAddNoteScreen(AddNoteInitialParams initialParams) {
     appNavigation.push(context, AddNoteScreen(initialParams: initialParams));
   }
 
